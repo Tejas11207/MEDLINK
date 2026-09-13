@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ───────── ALWAYS DARK ───────── */
+:root { color-scheme: dark; }
+
+html, body {
+  background-color: #0d1117;
+  color: #e6edf3;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+* { min-width: 0; }
+
+/* ───────── SCROLLBAR ───────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #161b22; }
+::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+/* ───────── FOCUS RING ───────── */
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #e53e3e;
+  outline-offset: 2px;
+}
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+
+/* ───────── KEYFRAMES ───────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(229,62,62,0.5); }
+  50%       { box-shadow: 0 0 22px rgba(229,62,62,1); }
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ───────── ANIMATION CLASSES ───────── */
+.animate-pulse-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
+.animate-glow      { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-ticker    { animation: ticker-scroll 30s linear infinite; }
+.animate-slide-in  { animation: slide-in 0.2s ease-out; }
+
+/* ───────── CARD ───────── */
+@layer components {
+  .v2-card {
+    @apply bg-[#161b22] border border-[#30363d] rounded-lg;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .v2-card-hover:hover {
+    @apply border-[#484f58];
+    box-shadow: 0 4px 14px rgba(0,0,0,0.55);
+  }
+
+  /* ───────── INPUT ───────── */
+  .v2-input {
+    @apply w-full bg-[#0d1117] border border-[#30363d] rounded text-[#e6edf3] text-[13px] px-3 py-2;
+    transition: border-color 0.15s ease;
+  }
+  .v2-input::placeholder { color: #6e7681; }
+  .v2-input:focus {
+    @apply outline-none border-[#e53e3e];
+  }
+
+  /* ───────── SOS BUTTON ───────── */
+  .sos-btn {
+    background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+    @apply text-white rounded font-bold text-xs tracking-wide cursor-pointer border-0;
+    animation: glow-pulse 2.5s ease-in-out infinite;
+    padding: 0.45rem 0.9rem;
+  }
+
+  /* ───────── BADGES ───────── */
+  .badge-red    { @apply inline-flex items-center; background: rgba(229,62,62,0.15); color: #fc5c65; border: 1px solid rgba(229,62,62,0.3); border-radius: 4px; }
+  .badge-green  { @apply inline-flex items-center; background: rgba(72,187,120,0.12); color: #48bb78; border: 1px solid rgba(72,187,120,0.25); border-radius: 4px; }
+  .badge-amber  { @apply inline-flex items-center; background: rgba(237,137,54,0.12); color: #ed8936; border: 1px solid rgba(237,137,54,0.25); border-radius: 4px; }
+  .badge-blue   { @apply inline-flex items-center; background: rgba(88,166,255,0.12); color: #58a6ff; border: 1px solid rgba(88,166,255,0.25); border-radius: 4px; }
+  .badge-subtle { @apply inline-flex items-center; background: rgba(139,148,158,0.12); color: #8b949e; border: 1px solid rgba(139,148,158,0.2); border-radius: 4px; }
+
+  /* ───────── MATCH SCORE BADGE ───────── */
+  .match-badge {
+    background: linear-gradient(135deg, #276749 0%, #38a169 100%);
+    @apply text-white font-bold text-[10px] px-2 py-0.5 rounded tracking-widest;
+  }
+
+  /* ───────── TOP NAV ───────── */
+  .topnav {
+    @apply bg-[#161b22] border-b border-[#30363d] sticky top-0 z-50;
+  }
+
+  /* ───────── STATUS TICKER ───────── */
+  .status-ticker {
+    @apply bg-[#0d1117] border-b border-[#21262d] overflow-hidden whitespace-nowrap;
+  }
+}
